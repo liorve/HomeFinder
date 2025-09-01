@@ -11,14 +11,13 @@ import {
   DialogTrigger,
   DialogClose,
 } from "../ui/dialog";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import ListingCard from "../ListingCard";
 
 const sampleListings = [
-    { id: 1, title: "Cozy Apartment", location: "Tel Aviv", price: "$1200/mo" },
-    { id: 2, title: "Modern Loft", location: "Jerusalem", price: "$1500/mo" },
-    { id: 3, title: "Beach House", location: "Haifa", price: "$2000/mo" },
-    { id: 4, title: "Downtown Condo", location: "Tel Aviv", price: "$1800/mo" },
-    
+  { id: 1, title: "Cozy Apartment", location: "Tel Aviv", price: "$1200/mo" },
+  { id: 2, title: "Modern Loft", location: "Jerusalem", price: "$1500/mo" },
+  { id: 3, title: "Beach House", location: "Haifa", price: "$2000/mo" },
+  { id: 4, title: "Downtown Condo", location: "Tel Aviv", price: "$1800/mo" },
 ];
 
 export default function ListingsPage() {
@@ -70,11 +69,9 @@ export default function ListingsPage() {
                 <DialogTitle>Advanced Search</DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
-                {/* Add more filters here */}
                 <Input placeholder="Min Price" type="number" />
                 <Input placeholder="Max Price" type="number" />
                 <Input placeholder="Bedrooms" type="number" />
-                {/* Close button */}
                 <div className="flex justify-end mt-4">
                   <DialogClose asChild>
                     <Button>Close</Button>
@@ -92,18 +89,17 @@ export default function ListingsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sampleListings.map((listing) => (
-            <Card key={listing.id}>
-              <CardHeader>
-                <CardTitle>{listing.title}</CardTitle>
-                <CardDescription>{listing.location}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-900 font-bold">{listing.price}</p>
-              </CardContent>
-              <CardFooter>
-                <Button size="sm" variant="default">View</Button>
-              </CardFooter>
-            </Card>
+            <ListingCard
+              key={listing.id}
+              title={listing.title}
+              location={listing.location}
+              price={listing.price}
+              imageUrl={
+                // use your single asset or keep this external URL
+                // import myImg from "../assets/house.jpg"; then pass imageUrl={myImg}
+                "https://img.yad2.co.il/Pic/202509/01/2_1/o/y2_1_05759_20250901122144.jpeg?c=6"
+              }
+            />
           ))}
         </div>
       </section>

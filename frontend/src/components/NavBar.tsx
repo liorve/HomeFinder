@@ -19,7 +19,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Left: Logo */}
         <div className="flex items-center space-x-2">
-          <MdMapsHomeWork size={28} className="text-gray-900" />
+          <MdMapsHomeWork size={28} className="text-primary" />
           <span className="font-bold text-gray-900 text-lg">HomeFinder</span>
         </div>
 
