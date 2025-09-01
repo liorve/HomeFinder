@@ -16,8 +16,7 @@ HomeFinder is a modern, full-stack rental and apartment listing platform. Users 
 - **Frontend:** React, TypeScript
 - **Backend:** FastAPI, Python
 - **Database:** PostgreSQL
-- **Map Integration:** Leaflet / Mapbox
-- **Containerization:** Docker (optional)
+- **Map Integration:** Leaflet
 
 ## Project Structure
 
