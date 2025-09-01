@@ -53,10 +53,12 @@ export default function Navbar() {
 
         {/* Right actions (desktop) */}
         <div className="hidden md:flex space-x-2">
-          <Button variant="default">Get Started</Button>
-          <Button variant="ghost" className="text-gray-700 hover:text-gray-900">
-            Sign In
-          </Button>
+            <Button variant="default">Get Started</Button>
+            <Link to='/signin'>
+                <Button variant="ghost" className="text-gray-700 hover:text-gray-900">
+                    Sign In
+                </Button>
+            </Link>
         </div>
 
         {/* Mobile menu */}
