@@ -5,13 +5,16 @@
 .DS_Store
 Thumbs.db
 
-# Node / React (client folder)
-client/node_modules/
-client/build/
-client/.env
-client/.pnp/
-client/.pnp.js
-client/.yarn-integrity
+# Node / React (frontend folder)
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/.pnp/
+frontend/.pnp.js
+frontend/.yarn-integrity
+node_modules/
+**/node_modules/
+
 
 # Logs
 *.log
@@ -20,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # TypeScript
-client/*.tsbuildinfo
+frontend/*.tsbuildinfo
 
 # ===============================
 # Python / FastAPI (backend folder)
