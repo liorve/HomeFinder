@@ -1,19 +1,31 @@
 // src/pages/ListingsPage.tsx
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "../ui/dialog";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 
 const sampleListings = [
-  { id: 1, title: "Cozy Apartment", location: "Tel Aviv", price: "$1200/mo" },
-  { id: 2, title: "Modern Loft", location: "Jerusalem", price: "$1500/mo" },
-  { id: 3, title: "Beach House", location: "Haifa", price: "$2000/mo" },
+    { id: 1, title: "Cozy Apartment", location: "Tel Aviv", price: "$1200/mo" },
+    { id: 2, title: "Modern Loft", location: "Jerusalem", price: "$1500/mo" },
+    { id: 3, title: "Beach House", location: "Haifa", price: "$2000/mo" },
+    { id: 4, title: "Downtown Condo", location: "Tel Aviv", price: "$1800/mo" },
+    
 ];
 
 export default function ListingsPage() {
+  const [openAdvanced, setOpenAdvanced] = useState(false);
+
   return (
     <div className="space-y-12">
-
       {/* Hero Section */}
       <section className="bg-gray-100 rounded-lg p-8 text-center flex flex-col items-center justify-center space-y-6">
         <h1 className="text-4xl font-bold text-gray-900">Find Your Perfect Home</h1>
@@ -47,6 +59,30 @@ export default function ListingsPage() {
           </Select>
 
           <Button variant="default">Search</Button>
+
+          {/* Advanced Search Modal */}
+          <Dialog open={openAdvanced} onOpenChange={setOpenAdvanced}>
+            <DialogTrigger asChild>
+              <Button variant="outline">Advanced Search</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-lg">
+              <DialogHeader>
+                <DialogTitle>Advanced Search</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                {/* Add more filters here */}
+                <Input placeholder="Min Price" type="number" />
+                <Input placeholder="Max Price" type="number" />
+                <Input placeholder="Bedrooms" type="number" />
+                {/* Close button */}
+                <div className="flex justify-end mt-4">
+                  <DialogClose asChild>
+                    <Button>Close</Button>
+                  </DialogClose>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
 
