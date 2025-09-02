@@ -14,6 +14,8 @@ const sampleListings = [
     balcony: true,
     furnished: false,
     coordinates: { lat: 32.0853, lng: 34.7818 }, // Tel Aviv
+    description:
+      "Bright and cozy 2-bedroom apartment located in the heart of Tel Aviv. With 65 sqm of living space, this home features a comfortable living room, a balcony perfect for morning coffee, and modern AC for the hot summers. Ideal for young couples or small families looking for city living at an affordable price. Walking distance to shops, cafes, and public transport.",
   },
   {
     id: 2,
@@ -30,6 +32,8 @@ const sampleListings = [
     balcony: false,
     furnished: true,
     coordinates: { lat: 31.7683, lng: 35.2137 }, // Jerusalem
+    description:
+      "A stunning 3-bedroom modern loft in Jerusalem with 95 sqm of stylish space. This home includes two bathrooms, private parking, and a secure mamad room. The apartment is fully furnished with contemporary décor and comes equipped with air conditioning for year-round comfort. Perfect for families seeking a safe, comfortable, and move-in-ready home in a great neighborhood.",
   },
   {
     id: 3,
@@ -45,7 +49,9 @@ const sampleListings = [
     parking: true,
     balcony: true,
     furnished: true,
-    coordinates: { lat: 32.7940, lng: 34.9896 }, // Haifa
+    coordinates: { lat: 32.794, lng: 34.9896 }, // Haifa
+    description:
+      "Spacious 4-bedroom beach house in Haifa, just minutes from the sea. With 180 sqm, this property offers three bathrooms, a large balcony with sea views, and private parking. Fully furnished and equipped with AC and a mamad for safety. Ideal for families or groups who want to enjoy coastal living in comfort and style.",
   },
   {
     id: 4,
@@ -62,6 +68,116 @@ const sampleListings = [
     balcony: false,
     furnished: false,
     coordinates: { lat: 32.0662, lng: 34.7778 }, // Central Tel Aviv
+    description:
+      "Beautiful 2-bedroom condo in central Tel Aviv, offering 70 sqm of bright living space. This property includes a modern kitchen, AC, and private parking – a rare find in the city center. Located just steps away from shopping, nightlife, and cultural attractions. A perfect choice for professionals or investors looking for prime real estate in one of Israel’s most vibrant cities.",
+  },
+  {
+    id: 5,
+    title: "Garden Duplex",
+    location: "Ramat Gan",
+    price: "₪3,100,000",
+    type: "sale",
+    bedrooms: 4,
+    bathrooms: 2,
+    sqm: 140,
+    ac: true,
+    mamad: true,
+    parking: true,
+    balcony: true,
+    furnished: false,
+    coordinates: { lat: 32.0823, lng: 34.8141 }, // Ramat Gan
+    description:
+      "Spacious 4-bedroom duplex with a private garden in Ramat Gan. 140 sqm across two levels, with a modern kitchen, two bathrooms, and a balcony overlooking greenery. Includes parking, AC, and a mamad. A perfect family home close to schools, shopping centers, and major highways.",
+  },
+  {
+    id: 6,
+    title: "Penthouse Suite",
+    location: "Herzliya",
+    price: "₪12,500/mo",
+    type: "rent",
+    bedrooms: 3,
+    bathrooms: 2,
+    sqm: 160,
+    ac: true,
+    mamad: true,
+    parking: true,
+    balcony: true,
+    furnished: true,
+    coordinates: { lat: 32.1656, lng: 34.8436 }, // Herzliya
+    description:
+      "Luxury 3-bedroom penthouse in Herzliya with panoramic sea views. 160 sqm of elegant living, featuring a spacious balcony, fully equipped kitchen, and modern furnishings. Includes parking, AC, and a mamad. Ideal for executives or families seeking high-end coastal living.",
+  },
+  {
+    id: 7,
+    title: "Student Studio",
+    location: "Beer Sheva",
+    price: "₪2,300/mo",
+    type: "rent",
+    bedrooms: 1,
+    bathrooms: 1,
+    sqm: 35,
+    ac: true,
+    mamad: false,
+    parking: false,
+    balcony: false,
+    furnished: true,
+    coordinates: { lat: 31.252, lng: 34.7915 }, // Beer Sheva
+    description:
+      "Compact and affordable studio apartment near Ben-Gurion University in Beer Sheva. 35 sqm with AC, furnished with essentials, and ideal for students or singles looking for convenient living at a budget-friendly price.",
+  },
+  {
+    id: 8,
+    title: "Family Villa",
+    location: "Netanya",
+    price: "₪4,600,000",
+    type: "sale",
+    bedrooms: 5,
+    bathrooms: 3,
+    sqm: 220,
+    ac: true,
+    mamad: true,
+    parking: true,
+    balcony: true,
+    furnished: false,
+    coordinates: { lat: 32.3215, lng: 34.8532 }, // Netanya
+    description:
+      "Elegant 5-bedroom villa in Netanya with 220 sqm of spacious living. Features include three bathrooms, a large balcony, private parking, AC, and a mamad. Perfect for large families who want comfort and proximity to the beach.",
+  },
+  {
+    id: 9,
+    title: "City View Apartment",
+    location: "Haifa",
+    price: "₪3,800/mo",
+    type: "rent",
+    bedrooms: 2,
+    bathrooms: 1,
+    sqm: 75,
+    ac: true,
+    mamad: true,
+    parking: true,
+    balcony: true,
+    furnished: false,
+    coordinates: { lat: 32.815, lng: 34.9892 }, // Haifa City
+    description:
+      "Modern 2-bedroom apartment in Haifa with a stunning city view. 75 sqm, includes a balcony, AC, mamad, and private parking. Great for professionals or couples looking for comfort in a central location.",
+  },
+  {
+    id: 10,
+    title: "Historic Stone Home",
+    location: "Safed",
+    price: "₪2,750,000",
+    type: "sale",
+    bedrooms: 3,
+    bathrooms: 2,
+    sqm: 120,
+    ac: true,
+    mamad: false,
+    parking: false,
+    balcony: true,
+    furnished: true,
+    coordinates: { lat: 32.9646, lng: 35.496 }, // Safed
+    description:
+      "Charming 3-bedroom stone house in Safed with 120 sqm of historic character. Features vaulted ceilings, a balcony with mountain views, and modern AC. Perfect for buyers seeking a unique blend of tradition and comfort.",
   },
 ];
 

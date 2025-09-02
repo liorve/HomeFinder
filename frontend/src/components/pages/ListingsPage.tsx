@@ -13,10 +13,16 @@ import {
 } from "../ui/dialog";
 import ListingCard from "../ListingCard";
 import sampleListings from "@/data/apartments_data_example";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ListingsPage() {
   const [openAdvanced, setOpenAdvanced] = useState(false);
+  const navigation = useNavigate();
+  
+  const handleViewDetails = (id: number) => {
+    navigation(`/listing/${id}`);
+  }
 
   return (
     <div className="space-y-12">
@@ -93,6 +99,7 @@ export default function ListingsPage() {
               sqm={listing.sqm}
               balcony={listing.balcony}
               imageUrl="https://img.yad2.co.il/Pic/202509/01/2_1/o/y2_1_05759_20250901122144.jpeg?c=6"
+              onView={() => handleViewDetails(listing.id)}
             />
           ))}
         </div>

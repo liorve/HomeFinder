@@ -2,6 +2,7 @@ import { Button } from "./ui/button";
 import { IoIosBed } from "react-icons/io";
 import { BsRulers } from "react-icons/bs";
 import { MdBalcony } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 type ListingCardProps = {
   title: string;
@@ -24,6 +25,8 @@ export default function ListingCard({
   balcony,
   onView,
 }: ListingCardProps) {
+
+
   return (
     <div className="group rounded-xl overflow-hidden border bg-card text-card-foreground shadow transition-shadow duration-200 hover:shadow-md flex flex-col">
       {/* Top image */}
