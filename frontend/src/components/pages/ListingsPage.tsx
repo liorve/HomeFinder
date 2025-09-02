@@ -12,13 +12,8 @@ import {
   DialogClose,
 } from "../ui/dialog";
 import ListingCard from "../ListingCard";
+import sampleListings from "@/data/apartments_data_example";
 
-const sampleListings = [
-  { id: 1, title: "Cozy Apartment", location: "Tel Aviv", price: "$1200/mo" },
-  { id: 2, title: "Modern Loft", location: "Jerusalem", price: "$1500/mo" },
-  { id: 3, title: "Beach House", location: "Haifa", price: "$2000/mo" },
-  { id: 4, title: "Downtown Condo", location: "Tel Aviv", price: "$1800/mo" },
-];
 
 export default function ListingsPage() {
   const [openAdvanced, setOpenAdvanced] = useState(false);
@@ -94,14 +89,14 @@ export default function ListingsPage() {
               title={listing.title}
               location={listing.location}
               price={listing.price}
-              imageUrl={
-                // use your single asset or keep this external URL
-                // import myImg from "../assets/house.jpg"; then pass imageUrl={myImg}
-                "https://img.yad2.co.il/Pic/202509/01/2_1/o/y2_1_05759_20250901122144.jpeg?c=6"
-              }
+              bedrooms={listing.bedrooms}
+              sqm={listing.sqm}
+              balcony={listing.balcony}
+              imageUrl="https://img.yad2.co.il/Pic/202509/01/2_1/o/y2_1_05759_20250901122144.jpeg?c=6"
             />
           ))}
         </div>
+
       </section>
     </div>
   );

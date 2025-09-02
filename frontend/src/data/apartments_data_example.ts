@@ -1,0 +1,68 @@
+const sampleListings = [
+  {
+    id: 1,
+    title: "Cozy Apartment",
+    location: "Tel Aviv",
+    price: "₪4,200/mo",
+    type: "rent",
+    bedrooms: 2,
+    bathrooms: 1,
+    sqm: 65,
+    ac: true,
+    mamad: false,
+    parking: false,
+    balcony: true,
+    furnished: false,
+    coordinates: { lat: 32.0853, lng: 34.7818 }, // Tel Aviv
+  },
+  {
+    id: 2,
+    title: "Modern Loft",
+    location: "Jerusalem",
+    price: "₪1,750,000",
+    type: "sale",
+    bedrooms: 3,
+    bathrooms: 2,
+    sqm: 95,
+    ac: true,
+    mamad: true,
+    parking: true,
+    balcony: false,
+    furnished: true,
+    coordinates: { lat: 31.7683, lng: 35.2137 }, // Jerusalem
+  },
+  {
+    id: 3,
+    title: "Beach House",
+    location: "Haifa",
+    price: "₪7,500/mo",
+    type: "rent",
+    bedrooms: 4,
+    bathrooms: 3,
+    sqm: 180,
+    ac: true,
+    mamad: true,
+    parking: true,
+    balcony: true,
+    furnished: true,
+    coordinates: { lat: 32.7940, lng: 34.9896 }, // Haifa
+  },
+  {
+    id: 4,
+    title: "Downtown Condo",
+    location: "Tel Aviv",
+    price: "₪2,350,000",
+    type: "sale",
+    bedrooms: 2,
+    bathrooms: 1,
+    sqm: 70,
+    ac: true,
+    mamad: false,
+    parking: true,
+    balcony: false,
+    furnished: false,
+    coordinates: { lat: 32.0662, lng: 34.7778 }, // Central Tel Aviv
+  },
+];
+
+export default sampleListings;
