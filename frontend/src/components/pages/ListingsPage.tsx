@@ -28,7 +28,7 @@ export default function ListingsPage() {
     <div className="space-y-12">
       {/* Hero Section */}
       <section className="bg-gray-100 rounded-lg p-8 text-center flex flex-col items-center justify-center space-y-6">
-        <h1 className="text-4xl font-bold text-gray-900">Find Your Perfect Home</h1>
+        <h1 className="text-4xl font-bold text-gray-900">Find Your Perfect <span className="text-primary">Home</span></h1>
         <p className="text-gray-700 max-w-xl">
           Discover amazing apartments, houses, and properties for rent or sale in your dream location.
         </p>
