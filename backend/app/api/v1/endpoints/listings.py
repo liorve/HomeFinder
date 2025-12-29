@@ -25,7 +25,7 @@ def create_listing(
     *,
     db: Session = Depends(deps.get_db),
     listing_in: schemas.ListingCreate,
-    # current_user: models.User = Depends(deps.get_current_active_user) # Uncomment to require auth
+    current_user: models.User = Depends(deps.get_current_active_user)
 ) -> Any:
     """
     Create new listing.

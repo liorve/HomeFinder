@@ -11,6 +11,11 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
+# Schema for login
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
 # Schema for updating a user
 class UserUpdate(UserBase):
     password: Optional[str] = None

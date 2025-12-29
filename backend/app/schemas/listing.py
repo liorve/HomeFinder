@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class ListingBase(BaseModel):
     title: str
     location: str
-    price: str
+    price: int
     type: str  # rent/sale
     rooms: int
     sqm: int
