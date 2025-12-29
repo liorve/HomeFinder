@@ -1,5 +1,6 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
 class User(Base):
@@ -13,3 +14,4 @@ class User(Base):
         server_default=func.now(),
         nullable=False
     )
+    listings = relationship("Listing", back_populates="owner")

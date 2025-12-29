@@ -30,7 +30,7 @@ def create_listing(
     """
     Create new listing.
     """
-    listing = models.Listing(**listing_in.dict())
+    listing = models.Listing(**listing_in.dict(), owner_id=current_user.id)
     db.add(listing)
     db.commit()
     db.refresh(listing)

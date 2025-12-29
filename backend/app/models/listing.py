@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Boolean, Float, Text
+from sqlalchemy import Column, Integer, String, Boolean, Float, Text, ForeignKey
+from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
 class Listing(Base):
@@ -22,3 +23,6 @@ class Listing(Base):
     lng = Column(Float)
     
     description = Column(Text)
+
+    owner_id = Column(Integer, ForeignKey("user.id"))
+    owner = relationship("User", back_populates="listings")

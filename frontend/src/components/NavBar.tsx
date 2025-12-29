@@ -1,8 +1,10 @@
 // src/components/Navbar.tsx
 import { Button } from "./ui/button";
 import { MdMapsHomeWork } from "react-icons/md";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
+import { useAtom, useSetAtom } from "jotai";
+import { userAtom, tokenAtom } from "../lib/atoms";
 import {
   Sheet,
   SheetContent,
@@ -11,16 +13,28 @@ import {
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [user] = useAtom(userAtom);
+  const setToken = useSetAtom(tokenAtom);
+  const setUser = useSetAtom(userAtom);
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleLogout = () => {
+    setToken(null);
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-md shadow-sm p-4">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Left: Logo */}
         <div className="flex items-center space-x-2">
-          <MdMapsHomeWork size={28} className="text-primary" />
-          <span className="font-bold text-gray-900 text-lg">HomeFinder</span>
+          <Link to="/" className="flex items-center space-x-2 cursor-pointer">
+            <MdMapsHomeWork size={28} className="text-primary" />
+            <span className="font-bold text-gray-900 text-lg">HomeFinder</span>
+          </Link>
         </div>
 
         {/* Desktop navigation */}
@@ -28,11 +42,10 @@ export default function Navbar() {
           <Link to="/listings">
             <Button
               variant="ghost"
-              className={`${
-                isActive("/listings")
-                  ? "text-gray-900 font-semibold"
-                  : "text-gray-700"
-              } hover:text-gray-900`}
+              className={`${isActive("/listings")
+                ? "text-gray-900 font-semibold"
+                : "text-gray-700"
+                } hover:text-gray-900`}
             >
               Listings
             </Button>
@@ -40,11 +53,10 @@ export default function Navbar() {
           <Link to="/map">
             <Button
               variant="ghost"
-              className={`${
-                isActive("/map")
-                  ? "text-gray-900 font-semibold"
-                  : "text-gray-700"
-              } hover:text-gray-900`}
+              className={`${isActive("/map")
+                ? "text-gray-900 font-semibold"
+                : "text-gray-700"
+                } hover:text-gray-900`}
             >
               Map View
             </Button>
@@ -52,15 +64,30 @@ export default function Navbar() {
         </div>
 
         {/* Right actions (desktop) */}
-        <div className="hidden md:flex space-x-2">
-            <Link to='/register'>
-              <Button variant="default">Get Started</Button>
-            </Link>
-            <Link to='/signin'>
-                <Button variant="ghost" className="text-gray-700 hover:text-gray-900">
-                    Sign In
+        <div className="hidden md:flex space-x-2 items-center">
+          {user ? (
+            <>
+              <Link to="/profile">
+                <Button variant="ghost" className="text-gray-900 mr-2">
+                  {user.full_name || user.email}
                 </Button>
-            </Link>
+              </Link>
+              <Button variant="ghost" onClick={handleLogout} className="text-red-500 hover:text-red-600 hover:bg-red-50">
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link to='/register'>
+                <Button variant="default">Get Started</Button>
+              </Link>
+              <Link to='/signin'>
+                <Button variant="ghost" className="text-gray-700 hover:text-gray-900">
+                  Sign In
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile menu */}
@@ -76,11 +103,10 @@ export default function Navbar() {
                 <Link to="/listings">
                   <Button
                     variant="ghost"
-                    className={`w-full justify-start ${
-                      isActive("/listings")
-                        ? "text-gray-900 font-semibold"
-                        : "text-gray-700"
-                    }`}
+                    className={`w-full justify-start ${isActive("/listings")
+                      ? "text-gray-900 font-semibold"
+                      : "text-gray-700"
+                      }`}
                   >
                     Listings
                   </Button>
@@ -88,11 +114,10 @@ export default function Navbar() {
                 <Link to="/map">
                   <Button
                     variant="ghost"
-                    className={`w-full justify-start ${
-                      isActive("/map")
-                        ? "text-gray-900 font-semibold"
-                        : "text-gray-700"
-                    }`}
+                    className={`w-full justify-start ${isActive("/map")
+                      ? "text-gray-900 font-semibold"
+                      : "text-gray-700"
+                      }`}
                   >
                     Map View
                   </Button>
@@ -111,6 +136,6 @@ export default function Navbar() {
           </Sheet>
         </div>
       </div>
-    </nav>
+    </nav >
   );
 }

@@ -14,36 +14,35 @@ from app.schemas.token import TokenPayload
 
 router = APIRouter()
 
-# We need this strictly to give Swagger UI the "Authorize" button/header functionality
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/login/access-token")
-
 @router.get("/me", response_model=schemas.User)
 def read_user_me(
-    db: Session = Depends(deps.get_db),
-    token: str = Depends(oauth2_scheme)
+    current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
-    Get current user (Manual implementation without nested dependencies).
+    Get current user.
     """
-    # 1. Decode token
-    try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
-        )
-        token_data = TokenPayload(**payload)
-    except (JWTError, ValidationError):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Could not validate credentials",
-        )
-        
-    # 2. Get user from DB
-    user = db.query(models.User).filter(models.User.id == token_data.sub).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-        
-    # 3. Check active
-    if not user.is_active:
-        raise HTTPException(status_code=400, detail="Inactive user")
-        
-    return user
+    return current_user
+
+
+@router.put("/me", response_model=schemas.User)
+def update_user_me(
+    *,
+    db: Session = Depends(deps.get_db),
+    user_in: schemas.UserUpdate,
+    current_user: models.User = Depends(deps.get_current_active_user),
+) -> Any:
+    """
+    Update own user.
+    """
+    if user_in.password:
+        hashed_password = security.get_password_hash(user_in.password)
+        current_user.hashed_password = hashed_password
+    if user_in.full_name:
+        current_user.full_name = user_in.full_name
+    if user_in.email:
+        current_user.email = user_in.email
+    
+    db.add(current_user)
+    db.commit()
+    db.refresh(current_user)
+    return current_user

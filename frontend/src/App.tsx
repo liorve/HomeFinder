@@ -7,21 +7,29 @@ import ListingDetailPage from "./components/pages/ListingDetailPage";
 import sampleListings from "./data/apartments_data_example";
 import RegisterPage from "./components/pages/RegisterPage";
 
+import { AuthLoader } from "./components/auth/AuthLoader";
+
+import ProfilePage from "./components/pages/ProfilePage";
+import CreateListingPage from "./components/pages/CreateListingPage";
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/listings" replace />} />
-          <Route path="listings" element={<ListingsPage />} />
-          <Route path="listing/:id" element={<ListingDetailPage listings={sampleListings} />} />
-          <Route path="map" element={<div>Map View Coming Soon!</div>} />
-          <Route path='signin' element={<SignInPage/>} />
-          <Route path='register' element={<RegisterPage />} />
-          <Route path="*" element={<div>404 Not Found</div>} />
-
-        </Route>
-      </Routes>
+      <AuthLoader>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Navigate to="/listings" replace />} />
+            <Route path="listings" element={<ListingsPage />} />
+            <Route path="listing/:id" element={<ListingDetailPage listings={sampleListings} />} />
+            <Route path="map" element={<div>Map View Coming Soon!</div>} />
+            <Route path='signin' element={<SignInPage />} />
+            <Route path='register' element={<RegisterPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="create-listing" element={<CreateListingPage />} />
+            <Route path="*" element={<div>404 Not Found</div>} />
+          </Route>
+        </Routes>
+      </AuthLoader>
     </BrowserRouter>
   );
 }

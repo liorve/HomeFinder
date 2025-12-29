@@ -1,17 +1,48 @@
 // src/pages/SignInPage.tsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSetAtom } from "jotai";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
+import { API_URL } from "../../lib/config";
+import { tokenAtom } from "../../lib/atoms";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const setToken = useSetAtom(tokenAtom);
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email:", email, "Password:", password);
-    alert("Sign in clicked! (mock)");
+    setError(null);
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${API_URL}/login/access-token`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.detail || "Failed to sign in");
+      }
+
+      const data = await response.json();
+      setToken(data.access_token);
+      navigate("/"); // Redirect to home page or dashboard
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -20,6 +51,12 @@ export default function SignInPage() {
         <h1 className="text-2xl font-bold mb-6 text-gray-900 text-center">
           Sign In
         </h1>
+
+        {error && (
+          <div className="bg-red-50 text-red-500 p-3 rounded-md mb-4 text-sm">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSignIn} className="space-y-4">
           <div>
@@ -51,8 +88,8 @@ export default function SignInPage() {
             </label>
           </div>
 
-          <Button type="submit" variant="default" className="w-full mt-4">
-            Sign In
+          <Button type="submit" variant="default" className="w-full mt-4" disabled={loading}>
+            {loading ? "Signing in..." : "Sign In"}
           </Button>
         </form>
 
