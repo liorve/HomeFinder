@@ -19,6 +19,8 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+import MortgageCalculator from "../MortgageCalculator";
+
 interface Listing {
   id: number;
   title: string;
@@ -134,6 +136,11 @@ export default function ListingDetailPage() {
             <Marker position={[listing.lat, listing.lng]} />
           </MapContainer>
         </div>
+
+        {/* Mortgage Calculator - Only for sale listings */}
+        {listing.type === 'sale' && (
+          <MortgageCalculator propertyPrice={listing.price} />
+        )}
 
         <Button>Contact Owner</Button>
       </div>

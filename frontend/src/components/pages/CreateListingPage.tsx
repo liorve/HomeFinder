@@ -95,7 +95,7 @@ export default function CreateListingPage() {
             }
 
             const urls = await response.json();
-            // Prepend API_URL to make them full URLs
+
             const fullUrls = urls.map((url: string) => `${API_URL.replace('/api/v1', '')}${url}`);
             setUploadedImageUrls(fullUrls);
         } catch (err: any) {
