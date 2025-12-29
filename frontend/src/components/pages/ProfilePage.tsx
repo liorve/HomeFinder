@@ -130,11 +130,7 @@ export default function ProfilePage() {
                             <label className="block text-sm font-medium text-gray-500">Email</label>
                             <div className="mt-1 text-gray-900">{user.email}</div>
                         </div>
-                        <div className="pt-4 border-t border-gray-100">
-                            <div className="text-sm text-gray-500">
-                                User ID: {user.id}
-                            </div>
-                        </div>
+
                     </div>
                 )}
             </div>

@@ -39,7 +39,9 @@ export default function CreateListingPage() {
     const [formData, setFormData] = useState({
         title: "",
         description: "",
-        location: "",
+        city: "",
+        street: "",
+        houseNumber: "",
         price: "",
         type: "rent",
         rooms: "",
@@ -106,10 +108,11 @@ export default function CreateListingPage() {
     };
 
     const geocodeAddress = async () => {
-        if (!formData.location || formData.location.length < 3) return;
+        const fullAddress = `${formData.street} ${formData.houseNumber}, ${formData.city}`;
+        if (!formData.city || !formData.street) return;
 
         try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(formData.location)}&format=json&limit=1`);
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(fullAddress)}&format=json&limit=1`);
             const data = await response.json();
 
             if (data && data.length > 0) {
@@ -130,9 +133,12 @@ export default function CreateListingPage() {
         setError(null);
 
         try {
-            // Convert numeric strings to numbers
+            // Destructure to separate the internal form fields from what the backend expects
+            const { city, street, houseNumber, ...baseFormData } = formData;
+
             const payload = {
-                ...formData,
+                ...baseFormData,
+                location: `${street} ${houseNumber}, ${city}`,
                 price: parseInt(formData.price) || 0,
                 rooms: parseInt(formData.rooms) || 0,
                 sqm: parseInt(formData.sqm) || 0,
@@ -214,18 +220,40 @@ export default function CreateListingPage() {
                     </div>
 
                     <div className="md:col-span-2">
-                        <label className="block text-gray-700 font-medium mb-1">Location (Address)</label>
+                        <label className="block text-gray-700 font-medium mb-1">City</label>
                         <Input
-                            name="location"
-                            value={formData.location}
+                            name="city"
+                            value={formData.city}
                             onChange={handleChange}
                             onBlur={geocodeAddress}
-                            placeholder="e.g. Herzl 12, Tel Aviv"
+                            placeholder="e.g. Tel Aviv"
                             required
                         />
-                        <p className="text-xs text-gray-500 mt-1">
-                            Coordinates will be fetched automatically when you leave this field.
-                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-4 gap-4 md:col-span-2">
+                        <div className="col-span-3">
+                            <label className="block text-gray-700 font-medium mb-1">Street</label>
+                            <Input
+                                name="street"
+                                value={formData.street}
+                                onChange={handleChange}
+                                onBlur={geocodeAddress}
+                                placeholder="e.g. Herzl"
+                                required
+                            />
+                        </div>
+                        <div className="col-span-1">
+                            <label className="block text-gray-700 font-medium mb-1">No.</label>
+                            <Input
+                                name="houseNumber"
+                                value={formData.houseNumber}
+                                onChange={handleChange}
+                                onBlur={geocodeAddress}
+                                placeholder="12"
+                                required
+                            />
+                        </div>
                     </div>
 
                     <div className="md:col-span-2 grid grid-cols-2 gap-2">

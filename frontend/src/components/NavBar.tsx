@@ -32,8 +32,8 @@ export default function Navbar() {
         {/* Left: Logo */}
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center space-x-2 cursor-pointer">
-            <MdMapsHomeWork size={28} className="text-primary" />
-            <span className="font-bold text-gray-900 text-lg">HomeFinder</span>
+            <MdMapsHomeWork size={36} className="text-primary" />
+            <span className="font-bold text-gray-900 text-2xl tracking-tight">HomeFinder</span>
           </Link>
         </div>
 
