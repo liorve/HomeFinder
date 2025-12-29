@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 type ListingCardProps = {
   title: string;
   location: string;
-  price: string;
+  price: number;
+  type?: string;
   imageUrl: string;
   bedrooms?: number;
   sqm?: number;
@@ -19,6 +20,7 @@ export default function ListingCard({
   title,
   location,
   price,
+  type,
   imageUrl,
   bedrooms,
   sqm,
@@ -64,7 +66,7 @@ export default function ListingCard({
         </div>
 
         <div className="mt-auto flex items-center justify-between">
-          <span className="font-bold">{price}</span>
+          <span className="font-bold">₪{price.toLocaleString()}{type === 'rent' ? '/mo' : ''}</span>
           <Button size="sm" onClick={onView}>
             View
           </Button>

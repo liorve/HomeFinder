@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel
 
 class ListingBase(BaseModel):
@@ -21,6 +21,7 @@ class ListingBase(BaseModel):
     lng: float
     
     description: Optional[str] = None
+    images: List[str] = []
 
 class ListingCreate(ListingBase):
     pass

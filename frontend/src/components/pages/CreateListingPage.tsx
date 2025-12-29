@@ -53,6 +53,10 @@ export default function CreateListingPage() {
         furnished: false,
     });
 
+    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+    const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
+    const [uploadingImages, setUploadingImages] = useState(false);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -60,6 +64,45 @@ export default function CreateListingPage() {
 
     const handleCheckboxChange = (name: string, checked: boolean | "indeterminate") => {
         setFormData(prev => ({ ...prev, [name]: checked === true }));
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setSelectedFiles(Array.from(e.target.files));
+        }
+    };
+
+    const handleUploadImages = async () => {
+        if (selectedFiles.length === 0) return;
+
+        setUploadingImages(true);
+        try {
+            const formData = new FormData();
+            selectedFiles.forEach(file => {
+                formData.append('files', file);
+            });
+
+            const response = await fetch(`${API_URL}/upload/`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to upload images');
+            }
+
+            const urls = await response.json();
+            // Prepend API_URL to make them full URLs
+            const fullUrls = urls.map((url: string) => `${API_URL.replace('/api/v1', '')}${url}`);
+            setUploadedImageUrls(fullUrls);
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setUploadingImages(false);
+        }
     };
 
     const geocodeAddress = async () => {
@@ -95,6 +138,7 @@ export default function CreateListingPage() {
                 sqm: parseInt(formData.sqm) || 0,
                 lat: parseFloat(formData.lat) || 0,
                 lng: parseFloat(formData.lng) || 0,
+                images: uploadedImageUrls,
             };
 
             const response = await fetch(`${API_URL}/listings/`, {
@@ -246,6 +290,52 @@ export default function CreateListingPage() {
                         className="flex w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         placeholder="Tell us more about the property..."
                     />
+                </div>
+
+                {/* Images */}
+                <div>
+                    <label className="block text-gray-700 font-medium mb-1">Images</label>
+                    <div className="space-y-3">
+                        <Input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={handleFileChange}
+                            className="cursor-pointer"
+                        />
+                        {selectedFiles.length > 0 && (
+                            <div className="flex items-center gap-2">
+                                <p className="text-sm text-gray-600">
+                                    {selectedFiles.length} file(s) selected
+                                </p>
+                                <Button
+                                    type="button"
+                                    size="sm"
+                                    onClick={handleUploadImages}
+                                    disabled={uploadingImages}
+                                >
+                                    {uploadingImages ? "Uploading..." : "Upload Images"}
+                                </Button>
+                            </div>
+                        )}
+                        {uploadedImageUrls.length > 0 && (
+                            <div className="space-y-2">
+                                <p className="text-sm font-medium text-green-600">
+                                    ✓ {uploadedImageUrls.length} image(s) uploaded successfully
+                                </p>
+                                <div className="grid grid-cols-4 gap-2">
+                                    {uploadedImageUrls.map((url, idx) => (
+                                        <img
+                                            key={idx}
+                                            src={url}
+                                            alt={`Preview ${idx + 1}`}
+                                            className="w-full h-20 object-cover rounded border"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* Amenities */}

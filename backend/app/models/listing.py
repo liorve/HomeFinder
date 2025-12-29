@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean, Float, Text, ForeignKey
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
@@ -23,6 +24,7 @@ class Listing(Base):
     lng = Column(Float)
     
     description = Column(Text)
+    images = Column(ARRAY(String), default=[])
 
     owner_id = Column(Integer, ForeignKey("user.id"))
     owner = relationship("User", back_populates="listings")
