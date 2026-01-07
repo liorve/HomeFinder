@@ -10,6 +10,8 @@ import { AuthLoader } from "./components/auth/AuthLoader";
 
 import ProfilePage from "./components/pages/ProfilePage";
 import CreateListingPage from "./components/pages/CreateListingPage";
+import MyPropertiesPage from "./components/pages/MyPropertiesPage";
+import EditListingPage from "./components/pages/EditListingPage";
 
 function App() {
   return (
@@ -24,7 +26,9 @@ function App() {
             <Route path='signin' element={<SignInPage />} />
             <Route path='register' element={<RegisterPage />} />
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="my-properties" element={<MyPropertiesPage />} />
             <Route path="create-listing" element={<CreateListingPage />} />
+            <Route path="edit-listing/:id" element={<EditListingPage />} />
             <Route path="*" element={<div>404 Not Found</div>} />
           </Route>
         </Routes>

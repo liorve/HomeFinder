@@ -61,6 +61,19 @@ export default function Navbar() {
               Map View
             </Button>
           </Link>
+          {user && (
+            <Link to="/my-properties">
+              <Button
+                variant="ghost"
+                className={`${isActive("/my-properties")
+                  ? "text-gray-900 font-semibold"
+                  : "text-gray-700"
+                  } hover:text-gray-900`}
+              >
+                My Properties
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Right actions (desktop) */}
@@ -122,6 +135,19 @@ export default function Navbar() {
                     Map View
                   </Button>
                 </Link>
+                {user && (
+                  <Link to="/my-properties">
+                    <Button
+                      variant="ghost"
+                      className={`w-full justify-start ${isActive("/my-properties")
+                        ? "text-gray-900 font-semibold"
+                        : "text-gray-700"
+                        }`}
+                    >
+                      My Properties
+                    </Button>
+                  </Link>
+                )}
                 <Button variant="ghost" className="w-full justify-start">
                   Get Started
                 </Button>

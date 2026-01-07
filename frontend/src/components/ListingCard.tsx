@@ -14,6 +14,8 @@ type ListingCardProps = {
   sqm?: number;
   balcony?: boolean;
   onView?: () => void;
+  onEdit?: () => void;
+  onDelete?: () => void;
 };
 
 export default function ListingCard({
@@ -26,6 +28,8 @@ export default function ListingCard({
   sqm,
   balcony,
   onView,
+  onEdit,
+  onDelete,
 }: ListingCardProps) {
 
 
@@ -65,11 +69,23 @@ export default function ListingCard({
           )}
         </div>
 
-        <div className="mt-auto flex items-center justify-between">
-          <span className="font-bold">₪{price.toLocaleString()}{type === 'rent' ? '/mo' : ''}</span>
-          <Button size="sm" onClick={onView}>
-            View
-          </Button>
+        <div className="mt-auto flex items-center justify-between gap-2">
+          <span className="font-bold flex-1">₪{price.toLocaleString()}{type === 'rent' ? '/mo' : ''}</span>
+          <div className="flex gap-2">
+            {onEdit && (
+              <Button size="sm" variant="outline" onClick={onEdit}>
+                Edit
+              </Button>
+            )}
+            {onDelete && (
+              <Button size="sm" variant="destructive" onClick={onDelete}>
+                Delete
+              </Button>
+            )}
+            <Button size="sm" onClick={onView}>
+              View
+            </Button>
+          </div>
         </div>
       </div>
     </div>
