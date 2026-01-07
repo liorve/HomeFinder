@@ -2,7 +2,6 @@ import { Button } from "./ui/button";
 import { IoIosBed } from "react-icons/io";
 import { BsRulers } from "react-icons/bs";
 import { MdBalcony } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 
 type ListingCardProps = {
   title: string;
